@@ -36,6 +36,7 @@ public protocol TestingImageDataSource: AnyObject {
     private weak var cornerView: CornerView?
     private var regionOfInterestLabelFrame: CGRect?
     
+    @IBOutlet weak var squareDebugView: UIImageView!
     var videoFeed = VideoFeed()
     private let machineLearningSemaphore = DispatchSemaphore(value: 1)
     
@@ -418,12 +419,31 @@ public protocol TestingImageDataSource: AnyObject {
         // for use in testing
         let (squareImage, fullImage) = self.testingImageDataSource?.nextSquareAndFullImage() ?? (squareCardImage, fullCardImage)
         
+        DispatchQueue.main.sync {
+            self.squareDebugView.image = UIImage(cgImage: squareImage)
+        }
+        
         if #available(iOS 11.2, *) {
+            /*
             if self.scanQrCode {
                 self.blockingQrModel(pixelBuffer: pixelBuffer)
             } else {
                 self.blockingOcrModel(squareCardImage: squareImage, fullCardImage: fullImage)
+            }*/
+            let model = UxModel()
+            let pixelBuffer = UIImage(cgImage: squareImage).pixelBuffer(width: 224, height: 224)!
+            let output = try! model.prediction(input1: pixelBuffer)
+            let modelClass = output.argMax()
+            DispatchQueue.main.sync {
+                if modelClass == 0 {
+                    regionOfInterestLabel?.layer.borderColor = UIColor.blue.cgColor
+                } else if modelClass == 1 {
+                    regionOfInterestLabel?.layer.borderColor = UIColor.white.cgColor
+                } else if modelClass == 2 {
+                    regionOfInterestLabel?.layer.borderColor = UIColor.red.cgColor
+                }
             }
+            print(modelClass)
         }
         
         self.machineLearningSemaphore.signal()
@@ -465,7 +485,7 @@ public protocol TestingImageDataSource: AnyObject {
         
         // calculate center of cropping region in Pixels.
         var cx, cy: CGFloat
-        
+        var cropWidthPixels, cropHeightPixels: CGFloat
         
         // confirm videoGravity settings in previewView. Calculations based on .resizeAspectFill
         DispatchQueue.main.async {
@@ -486,6 +506,9 @@ public protocol TestingImageDataSource: AnyObject {
             
             cx = regionOfInterestCenterX * pointsToPixels + croppedOffset
             cy = regionOfInterestCenterY * pointsToPixels
+            cropWidthPixels = regionOfInterestLabelFrame.size.width * pointsToPixels
+            cropWidthPixels += cropWidthPixels * 0.1
+            cropHeightPixels = cropWidthPixels
         } else {
             // top and bottom of the image cropped
             //      tested on: iPad Mini 2
@@ -494,12 +517,41 @@ public protocol TestingImageDataSource: AnyObject {
             
             cx = regionOfInterestCenterX * pointsToPixels
             cy = regionOfInterestCenterY * pointsToPixels + croppedOffset
+            cropWidthPixels = regionOfInterestLabelFrame.size.width * pointsToPixels
+            cropWidthPixels += cropWidthPixels * 0.1
+            cropHeightPixels = cropWidthPixels
         }
         
-        let rect = CGRect(x: cx - width / 2.0, y: cy - height / 2.0, width: width, height: height)
+        //let rect = CGRect(x: cx - width / 2.0, y: cy - height / 2.0, width: width, height: height)
+        let rect = CGRect(x: cx - cropWidthPixels / 2.0, y: cy - cropHeightPixels / 2.0, width: cropWidthPixels, height: cropHeightPixels)
         
         self.currentImageRect = rect
         
         return image.cropping(to: rect)
+    }
+}
+
+@available(iOS 11.0, *)
+extension UxModelOutput {
+    func argMax() -> Int {
+        return self.argAndValueMax().0
+    }
+    
+    func argAndValueMax() -> (Int, Double) {
+        var maxIdx = -1
+        var maxValue = NSNumber(value: -1.0)
+        for idx in 0..<3 {
+            let index: [NSNumber] = [NSNumber(value: idx)]
+            let value = self.output1[index]
+            let score_names = ["Card", "Neg", "Pan"]
+            let score_name = score_names[idx]
+            print("\(score_name) -> \(value)")
+            if value.doubleValue > maxValue.doubleValue {
+                maxIdx = idx
+                maxValue = value
+            }
+        }
+        
+        return (maxIdx, maxValue.doubleValue)
     }
 }

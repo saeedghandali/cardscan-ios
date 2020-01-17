@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -92,6 +92,13 @@
                                                     <action selector="skipButtonPress" destination="RWC-EC-Zxy" eventType="touchUpInside" id="cHr-Ao-WWW"/>
                                                 </connections>
                                             </button>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cQn-NG-B00">
+                                                <rect key="frame" x="0.0" y="32.5" width="128" height="128"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="128" id="5I4-Yb-N8q"/>
+                                                    <constraint firstAttribute="width" constant="128" id="TgG-eh-t6q"/>
+                                                </constraints>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -101,6 +108,8 @@
                                             <constraint firstItem="GI2-Cu-50E" firstAttribute="centerX" secondItem="hHp-1y-YRu" secondAttribute="centerX" id="Oti-bY-2qM"/>
                                             <constraint firstItem="GI2-Cu-50E" firstAttribute="centerY" secondItem="hHp-1y-YRu" secondAttribute="centerY" id="ShD-kV-AJC"/>
                                             <constraint firstItem="GI2-Cu-50E" firstAttribute="centerX" secondItem="hHp-1y-YRu" secondAttribute="centerX" id="dUY-ZN-jJY"/>
+                                            <constraint firstItem="cQn-NG-B00" firstAttribute="leading" secondItem="hHp-1y-YRu" secondAttribute="leading" id="tev-kE-mYn"/>
+                                            <constraint firstAttribute="bottom" secondItem="cQn-NG-B00" secondAttribute="bottom" id="wOk-Nf-WWn"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -221,12 +230,13 @@
                         <outlet property="regionOfInterestLabel" destination="2Xu-ZF-zZr" id="bDd-L8-OE8"/>
                         <outlet property="scanCardLabel" destination="vfu-3N-l48" id="2kI-61-Gm4"/>
                         <outlet property="skipButton" destination="X5c-eH-4ZR" id="4S7-9x-HVa"/>
+                        <outlet property="squareDebugView" destination="cQn-NG-B00" id="RqL-ez-5AR"/>
                         <outlet property="torchButton" destination="GI2-Cu-50E" id="F1H-K0-X4c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LMM-sw-EX2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="24.637681159420293" y="206.25"/>
+            <point key="canvasLocation" x="23.199999999999999" y="205.54722638680661"/>
         </scene>
     </scenes>
     <resources>
