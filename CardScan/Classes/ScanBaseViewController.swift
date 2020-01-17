@@ -430,10 +430,12 @@ public protocol TestingImageDataSource: AnyObject {
             } else {
                 self.blockingOcrModel(squareCardImage: squareImage, fullCardImage: fullImage)
             }*/
+            let start = Date()
             let model = UxModel()
             let pixelBuffer = UIImage(cgImage: squareImage).pixelBuffer(width: 224, height: 224)!
             let output = try! model.prediction(input1: pixelBuffer)
             let modelClass = output.argMax()
+            //print("prediction time -> \(-start.timeIntervalSinceNow)")
             DispatchQueue.main.sync {
                 if modelClass == 0 {
                     regionOfInterestLabel?.layer.borderColor = UIColor.blue.cgColor
@@ -443,7 +445,6 @@ public protocol TestingImageDataSource: AnyObject {
                     regionOfInterestLabel?.layer.borderColor = UIColor.red.cgColor
                 }
             }
-            print(modelClass)
         }
         
         self.machineLearningSemaphore.signal()
@@ -545,7 +546,7 @@ extension UxModelOutput {
             let value = self.output1[index]
             let score_names = ["Card", "Neg", "Pan"]
             let score_name = score_names[idx]
-            print("\(score_name) -> \(value)")
+            //print("\(score_name) -> \(value)")
             if value.doubleValue > maxValue.doubleValue {
                 maxIdx = idx
                 maxValue = value
