@@ -581,6 +581,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
 			productRefGroup = 99F45B7B7FABC011494735AD103CE39E /* Products */;
@@ -790,6 +791,23 @@
 			};
 			name = Debug;
 		};
+		15850FB5A756E04347BCC580DB48FED2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 68DF414DB737DE9F08A171DE583BCE5D /* CardScan.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/CardScan";
+				IBSC_MODULE = CardScan;
+				INFOPLIST_FILE = "Target Support Files/CardScan/ResourceBundle-CardScan-CardScan-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				PRODUCT_NAME = CardScan;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
 		196DFA3E4A09A28224918543529A1885 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -887,22 +905,6 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
-		};
-		2A8A2C4A99314109068CE0F8219FBCD0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 68DF414DB737DE9F08A171DE583BCE5D /* CardScan.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/CardScan";
-				INFOPLIST_FILE = "Target Support Files/CardScan/ResourceBundle-CardScan-CardScan-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				PRODUCT_NAME = CardScan;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Release;
 		};
 		51838BA29EFC08F5AE1CA9287F0CCA5F /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1039,12 +1041,13 @@
 			};
 			name = Debug;
 		};
-		9BA0CC5FFBFDE3212FFCB666D6F113C9 /* Debug */ = {
+		978FA3743F91DEBB10D4522982E2E35D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 68DF414DB737DE9F08A171DE583BCE5D /* CardScan.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/CardScan";
+				IBSC_MODULE = CardScan;
 				INFOPLIST_FILE = "Target Support Files/CardScan/ResourceBundle-CardScan-CardScan-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				PRODUCT_NAME = CardScan;
@@ -1224,8 +1227,8 @@
 		71EDD2F76B2F9511D6440E511D9ABFA1 /* Build configuration list for PBXNativeTarget "CardScan-CardScan" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9BA0CC5FFBFDE3212FFCB666D6F113C9 /* Debug */,
-				2A8A2C4A99314109068CE0F8219FBCD0 /* Release */,
+				978FA3743F91DEBB10D4522982E2E35D /* Debug */,
+				15850FB5A756E04347BCC580DB48FED2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
