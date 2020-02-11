@@ -15,7 +15,7 @@ public struct CreditCardUtils {
     private static let prefixesMastercard = ["2221", "2222", "2223", "2224", "2225", "2226",
                                      "2227", "2228", "2229", "223", "224", "225", "226",
                                      "227", "228", "229", "23", "24", "25", "26", "270",
-                                     "271", "2720", "50", "51", "52", "53", "54", "55",
+                                     "271", "2720", "50", "51", "52", "53", "54", "55", "6037", "6221", "6104",
                                      "67"]
     private static let prefixesUnionPay = ["62"]
     private static let prefixesVisa = ["4"]

@@ -27,7 +27,10 @@ struct RecognizedDigits {
         
         let modelInput = FourRecognizeInput(input1: pixelBuffer)
         guard let prediction = try? recognizeModel.prediction(input: modelInput) else {
+            
+            print("recognizemodek : \(recognizeModel)")
             return nil
+           
         }
         
         var digits: [Int] = []

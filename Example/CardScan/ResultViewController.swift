@@ -31,7 +31,7 @@ class ResultViewController: UIViewController {
         }
       
         self.numberLabel.text = format(number: self.number ?? "")
-        self.expirationLabel.text = expiration ?? ""
+        self.expirationLabel.text = format(number: self.expiration ?? "")
     }
     
     func format(number: String) -> String {
